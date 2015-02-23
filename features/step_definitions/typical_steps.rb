@@ -1,4 +1,9 @@
-When(/^I launch the sample application and press '(.+)'$/) do |button_text|
+Given(/^I launch the sample application$/) do
+  # 'Launching' the applications is a non-action as appium's driver
+  # always does that for you. This step exists for narrative purposes.
+end
+
+When(/^I press '(.+)'$/) do |button_text|
   button(button_text).click
 end
 
