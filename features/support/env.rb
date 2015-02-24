@@ -18,7 +18,7 @@ capabilities[:platformName] = capabilities[:platformName].downcase.to_sym
 case capabilities[:platformName]
 when :ios
   capabilities.merge!({
-    deviceName:      ENV['DEVICE_NAME'] || 'iPhone 6',
+    deviceName:      ENV['DEVICE_NAME'] || 'iPhone Simulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '8.1'
   })
 when :android
