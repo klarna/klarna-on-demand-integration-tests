@@ -28,6 +28,17 @@ when :android
   })
 end
 
+options = {}
+
+if (ENV['TRAVIS'])
+  auth_data = "#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}"
+  options[:appium_lib] = { server_url: "http://#{auth_data}@ondemand.saucelabs.com/wd/hub" }
+
+  capabilities['tunnel-identifier'] = ENV['TRAVIS_JOB_NUMBER']
+end
+
+options[:caps] = capabilities
+
 Appium::Driver.new(caps: capabilities)
 Appium.promote_appium_methods AppiumWorld
 
