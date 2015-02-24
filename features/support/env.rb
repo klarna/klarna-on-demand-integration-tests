@@ -8,21 +8,23 @@ require 'cucumber/ast'
 class AppiumWorld
 end
 
+# Set default per-platform capabilities
 capabilities = {
-  platformName:    ENV['PLATFORM'] || (raise 'Please supply the desired platform'),
   app:             ENV['APP_LOCATION'] || (raise 'Please specify the app\'s location')
 }
 
-capabilities[:platformName] = capabilities[:platformName].downcase.to_sym
+platformName = ENV['PLATFORM'] || (raise 'Please supply the desired platform')
 
-case capabilities[:platformName]
+case platformName.downcase.to_sym
 when :ios
   capabilities.merge!({
+    platformName:    'iOS',
     deviceName:      ENV['DEVICE_NAME'] || 'iPhone Simulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '8.1'
   })
 when :android
   capabilities.merge!({
+    platformName:    'Android',
     deviceName:      ENV['DEVICE_NAME'] || 'Android Emulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '4.4'
   })
@@ -30,11 +32,15 @@ end
 
 options = {}
 
+# Set Travis specific options/capabilities
 if (ENV['TRAVIS'])
   auth_data = "#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}"
   options[:appium_lib] = { server_url: "http://#{auth_data}@ondemand.saucelabs.com/wd/hub" }
 
   capabilities['tunnel-identifier'] = ENV['TRAVIS_JOB_NUMBER']
+  capabilities[:appiumVersion] = '1.3.4'
+  capabilities['record-video'] = false
+  capabilities[:browserName] = ''
 end
 
 options[:caps] = capabilities
