@@ -39,7 +39,7 @@ if (ENV['TRAVIS'])
 
   capabilities['tunnel-identifier'] = ENV['TRAVIS_JOB_NUMBER']
   capabilities[:appiumVersion] = '1.3.4'
-  capabilities['record-video'] = false
+  capabilities['record-video'] = true
   capabilities[:browserName] = ''
   capabilities[:name] = ENV['TRAVIS_COMMIT_RANGE']
 end
