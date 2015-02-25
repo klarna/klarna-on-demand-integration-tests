@@ -43,6 +43,7 @@ if (ENV['TRAVIS'])
   capabilities[:appiumVersion] = '1.3.4'
   capabilities['record-video'] = false
   capabilities[:browserName] = ''
+  capabilities[:name] = ENV['TRAVIS_COMMIT_RANGE']
 end
 
 options[:caps] = capabilities
