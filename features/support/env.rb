@@ -28,11 +28,13 @@ when :android
     deviceName:      ENV['DEVICE_NAME'] || 'Android Emulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '4.4'
   })
+
+  capabilities[:automationName] = 'Selendroid' if ENV['TRAVIS']
 end
 
 options = {}
 
-# Set Travis specific options/capabilities
+# Set Travis specific shared options/capabilities
 if (ENV['TRAVIS'])
   auth_data = "#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}"
   options[:appium_lib] = { server_url: "http://#{auth_data}@ondemand.saucelabs.com/wd/hub" }
