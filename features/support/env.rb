@@ -28,8 +28,6 @@ when :android
     deviceName:      ENV['DEVICE_NAME'] || 'Android Emulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '4.4'
   })
-
-  capabilities[:automationName] = 'Selendroid' if ENV['TRAVIS']
 end
 
 options = {}
