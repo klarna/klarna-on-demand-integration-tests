@@ -28,6 +28,8 @@ when :android
     deviceName:      ENV['DEVICE_NAME'] || 'Android Emulator',
     platformVersion: ENV['PLATFORM_VERSION'] || '4.4'
   })
+
+  capabilities[:browserName] = 'browser' if ENV['TRAVIS']
 end
 
 options = {}
@@ -40,7 +42,6 @@ if (ENV['TRAVIS'])
   capabilities['tunnel-identifier'] = ENV['TRAVIS_JOB_NUMBER']
   capabilities[:appiumVersion] = '1.3.4'
   capabilities['record-video'] = true
-  capabilities[:browserName] = ''
   capabilities[:name] = ENV['TRAVIS_COMMIT_RANGE']
 end
 
