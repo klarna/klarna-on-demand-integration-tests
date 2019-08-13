@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'appium_lib'
+gem 'appium_lib', '>= 9.0.0'
 gem 'cucumber'
 gem 'rspec-expectations'
 
